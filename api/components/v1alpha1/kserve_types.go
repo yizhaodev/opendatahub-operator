@@ -55,6 +55,8 @@ type KserveCommonSpec struct {
 	ModelsAsService DSCModelsAsServiceSpec `json:"modelsAsService,omitempty"`
 	// Configures and enables workload-variant-autoscaler (WVA) integration
 	WVA WVASpec `json:"wva,omitempty"`
+	// Configures and enables LLM Batch Gateway integration
+	BatchGateway DSCBatchGatewaySpec `json:"batchGateway,omitempty"`
 }
 
 // nimSpec enables NVIDIA NIM integration
