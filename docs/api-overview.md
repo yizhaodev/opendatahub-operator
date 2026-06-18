@@ -17,6 +17,7 @@
 Package v1 contains API Schema definitions for the components v1 API group
 
 ### Resource Types
+- [AIGateway](#aigateway)
 - [Dashboard](#dashboard)
 - [DataSciencePipelines](#datasciencepipelines)
 - [FeastOperator](#feastoperator)
@@ -34,6 +35,114 @@ Package v1 contains API Schema definitions for the components v1 API group
 - [TrustyAI](#trustyai)
 - [Workbenches](#workbenches)
 
+
+
+#### AIGateway
+
+
+
+AIGateway is the Schema for the aigateways API
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `components.platform.opendatahub.io/v1alpha1` | | |
+| `kind` _string_ | `AIGateway` | | |
+| `kind` _string_ | Kind is a string value representing the REST resource this object represents.<br />Servers may infer this from the endpoint the client submits requests to.<br />Cannot be updated.<br />In CamelCase.<br />More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds |  |  |
+| `apiVersion` _string_ | APIVersion defines the versioned schema of this representation of an object.<br />Servers should convert recognized schemas to the latest internal value, and<br />may reject unrecognized values.<br />More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources |  |  |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.25/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[AIGatewaySpec](#aigatewayspec)_ |  |  |  |
+| `status` _[AIGatewayStatus](#aigatewaystatus)_ |  |  |  |
+
+
+#### AIGatewayBatchGatewaySpec
+
+
+
+AIGatewayBatchGatewaySpec defines the configuration for the BatchGateway sub-component.
+
+
+
+_Appears in:_
+- [AIGatewayCommonSpec](#aigatewaycommonspec)
+- [AIGatewaySpec](#aigatewayspec)
+- [DSCAIGateway](#dscaigateway)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `managementState` _[ManagementState](https://pkg.go.dev/github.com/openshift/api@v0.0.0-20250812222054-88b2b21555f3/operator/v1#ManagementState)_ | Set to one of the following values:<br />- "Managed" : the operator is actively managing the component and trying to keep it active.<br />              It will only upgrade the component if it is safe to do so.<br />- "Removed" : the operator is actively managing the component and will not install it,<br />              or if it is installed, the operator will try to remove it. |  | Enum: [Managed Removed] <br /> |
+
+
+#### AIGatewayCommonSpec
+
+
+
+
+
+
+
+_Appears in:_
+- [AIGatewaySpec](#aigatewayspec)
+- [DSCAIGateway](#dscaigateway)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `batchGateway` _[AIGatewayBatchGatewaySpec](#aigatewaybatchgatewayspec)_ | BatchGateway sub-component configuration. |  |  |
+
+
+#### AIGatewayCommonStatus
+
+
+
+AIGatewayCommonStatus defines the shared observed state of AIGateway
+
+
+
+_Appears in:_
+- [AIGatewayStatus](#aigatewaystatus)
+- [DSCAIGatewayStatus](#dscaigatewaystatus)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `releases` _[ComponentRelease](#componentrelease) array_ |  |  |  |
+
+
+#### AIGatewaySpec
+
+
+
+AIGatewaySpec defines the desired state of AIGateway
+
+
+
+_Appears in:_
+- [AIGateway](#aigateway)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `batchGateway` _[AIGatewayBatchGatewaySpec](#aigatewaybatchgatewayspec)_ | BatchGateway sub-component configuration. |  |  |
+
+
+#### AIGatewayStatus
+
+
+
+AIGatewayStatus defines the observed state of AIGateway
+
+
+
+_Appears in:_
+- [AIGateway](#aigateway)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `phase` _string_ |  |  |  |
+| `observedGeneration` _integer_ | The generation observed by the resource controller. |  |  |
+| `conditions` _[Condition](#condition) array_ |  |  |  |
+| `releases` _[ComponentRelease](#componentrelease) array_ |  |  |  |
 
 
 #### APIKeysConfig
@@ -68,6 +177,39 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `managementState` _[ManagementState](https://pkg.go.dev/github.com/openshift/api@v0.0.0-20250812222054-88b2b21555f3/operator/v1#ManagementState)_ | Set to one of the following values:<br />- "Managed" : the operator is actively managing the bundled Argo Workflows controllers.<br />              It will only upgrade the Argo Workflows controllers if it is safe to do so. This is the default<br />              behavior.<br />- "Removed" : the operator is not managing the bundled Argo Workflows controllers and will not install it.<br />              If it is installed, the operator will remove it but will not remove other Argo Workflows<br />              installations. | Managed | Enum: [Managed Removed] <br /> |
+
+
+#### DSCAIGateway
+
+
+
+DSCAIGateway contains all the configuration exposed in DSC instance for AIGateway component
+
+
+
+_Appears in:_
+- [Components](#components)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `managementState` _[ManagementState](https://pkg.go.dev/github.com/openshift/api@v0.0.0-20250812222054-88b2b21555f3/operator/v1#ManagementState)_ | Set to one of the following values:<br />- "Managed" : the operator is actively managing the component and trying to keep it active.<br />              It will only upgrade the component if it is safe to do so<br />- "Removed" : the operator is actively managing the component and will not install it,<br />              or if it is installed, the operator will try to remove it |  | Enum: [Managed Removed] <br /> |
+| `batchGateway` _[AIGatewayBatchGatewaySpec](#aigatewaybatchgatewayspec)_ | BatchGateway sub-component configuration. |  |  |
+
+
+#### DSCAIGatewayStatus
+
+
+
+DSCAIGatewayStatus struct holds the status for the AIGateway component exposed in the DSC
+
+
+
+_Appears in:_
+- [ComponentsStatus](#componentsstatus)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `managementState` _[ManagementState](https://pkg.go.dev/github.com/openshift/api@v0.0.0-20250812222054-88b2b21555f3/operator/v1#ManagementState)_ | Set to one of the following values:<br />- "Managed" : the operator is actively managing the component and trying to keep it active.<br />              It will only upgrade the component if it is safe to do so<br />- "Removed" : the operator is actively managing the component and will not install it,<br />              or if it is installed, the operator will try to remove it |  | Enum: [Managed Removed] <br /> |
 
 
 #### DSCDashboard
@@ -2569,6 +2711,7 @@ _Appears in:_
 | `mlflowoperator` _[DSCMLflowOperator](#dscmlflowoperator)_ | MLflow Operator component configuration. |  |  |
 | `trainer` _[DSCTrainer](#dsctrainer)_ | Trainer component configuration. |  |  |
 | `sparkoperator` _[DSCSparkOperator](#dscsparkoperator)_ | SparkOperator component configuration. |  |  |
+| `aigateway` _[DSCAIGateway](#dscaigateway)_ | AIGateway component configuration. |  |  |
 
 
 #### ComponentsStatus
@@ -2599,6 +2742,7 @@ _Appears in:_
 | `mlflowoperator` _[DSCMLflowOperatorStatus](#dscmlflowoperatorstatus)_ | MLflow Operator component status. |  |  |
 | `trainer` _[DSCTrainerStatus](#dsctrainerstatus)_ | Trainer component status. |  |  |
 | `sparkoperator` _[DSCSparkOperatorStatus](#dscsparkoperatorstatus)_ | SparkOperator component status. |  |  |
+| `aigateway` _[DSCAIGatewayStatus](#dscaigatewaystatus)_ | AIGateway component status. |  |  |
 
 
 #### DataScienceCluster

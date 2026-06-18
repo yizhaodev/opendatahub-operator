@@ -33,6 +33,7 @@ declare -A ODH_COMPONENT_MANIFESTS=(
     ["mlflowoperator"]="opendatahub-io:mlflow-operator:main@b55bcb6aa528ccecf8904745bb0218350b1ff453:config"
     ["sparkoperator"]="opendatahub-io:spark-operator:main@1f4c2a848c928c24d914139222d24858aae6cf32:config"
     ["wva"]="opendatahub-io:workload-variant-autoscaler:main@c5b2a5f2d6ecbd0a37b0798db0858c64b03e7675:config"
+    ["batchgateway"]="opendatahub-io:llm-d-batch-gateway-operator:main@27a22ad93d5edb7aecd7b85668841bbb072188a0:config"
 )
 
 # RHOAI Component Manifests
@@ -55,6 +56,7 @@ declare -A RHOAI_COMPONENT_MANIFESTS=(
     ["mlflowoperator"]="red-hat-data-services:mlflow-operator:rhoai-3.5-ea.2@2adb76fe3cf7e4faf8cfc9c5435c288d029c42d8:config"
     ["sparkoperator"]="red-hat-data-services:spark-operator:rhoai-3.5-ea.2@c9e197c63f003022feefdc2405ae081ec8b1916f:config"
     ["wva"]="red-hat-data-services:workload-variant-autoscaler:rhoai-3.5-ea.2@93c9e78bd1671f577e5efe6ec9248b32d25f8124:config"
+    ["batchgateway"]="red-hat-data-services:llm-d-batch-gateway-operator:rhoai-3.5-ea.2:config"
 )
 
 # {ODH,RHOAI}_COMPONENT_CHARTS are lists of chart repositories info to fetch helm charts
